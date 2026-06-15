@@ -1,1 +1,24 @@
 @import "tailwindcss";
+
+/* 自定义主题色 */
+@theme {
+  --color-primary: #1a365d;
+  --color-primary-light: #2a4a7f;
+  --color-accent: #e2e8f0;
+}
+
+/* 基础重置 */
+body {
+  margin: 0;
+  font-family: "Inter", "Noto Sans SC", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 全局滚动条样式 */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
