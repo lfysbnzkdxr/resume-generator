@@ -6,7 +6,6 @@
     "moduleResolution": "bundler",
     "strict": true,
     "jsx": "preserve",
-    "jsxImportSource": "vue",
     "paths": {
       "@/*": ["./src/*"]
     },
