@@ -19,10 +19,10 @@
   }
 
   .print-page {
-    width: 100%;
-    min-height: 297mm;
-    padding: 0;
-    box-shadow: none;
-    border: none;
+    width: 100% !important;
+    min-height: auto !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
   }
 }
