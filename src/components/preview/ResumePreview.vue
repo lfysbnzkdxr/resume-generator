@@ -15,13 +15,13 @@ function formatDate(start: string, end: string): string {
 <template>
   <div class="print-page mx-auto w-[210mm] bg-white px-[20mm] py-[15mm] shadow-lg" style="min-height: 297mm;">
     <!-- 个人信息 -->
-    <div class="mb-6">
+    <div class="mb-4">
       <div class="flex gap-6">
         <div class="flex-1">
-          <div class="grid grid-cols-2 gap-x-6 gap-y-2 text-sm text-gray-900">
+          <div class="grid grid-cols-2 gap-x-6 gap-y-2 text-gray-900">
             <div v-for="key in resume.basicsFieldOrder" :key="key" class="flex items-baseline gap-1">
-              <span class="shrink-0 font-medium text-gray-500">{{ getBasicFieldLabel(key) }}：</span>
-              <span>{{ (resume.basics as any)[key] || '-' }}</span>
+              <span class="shrink-0 font-semibold text-gray-500">{{ getBasicFieldLabel(key) }}：</span>
+              <span class="font-medium">{{ (resume.basics as any)[key] || '-' }}</span>
             </div>
           </div>
         </div>
@@ -51,13 +51,12 @@ function formatDate(start: string, end: string): string {
     <div v-if="resume.projects.length > 0" class="print-section mb-5">
       <h2 class="mb-3 border-b border-primary pb-1 text-sm font-bold uppercase tracking-wider text-primary">项目经历</h2>
       <div v-for="item in resume.projects" :key="item.id" class="mb-4">
-        <div class="flex items-baseline justify-between">
-          <div>
-            <span class="font-semibold text-gray-900">{{ item.name }}</span>
-            <span class="ml-2 text-sm text-gray-600">{{ item.role }}</span>
-          </div>
-          <span class="text-xs text-gray-500">{{ formatDate(item.startDate, item.endDate) }}</span>
+        <div class="grid grid-cols-3 text-sm">
+          <span class="font-semibold text-gray-900">{{ item.name }}</span>
+          <span class="text-center text-gray-600">{{ item.role }}</span>
+          <span class="text-right text-xs text-gray-500">{{ formatDate(item.startDate, item.endDate) }}</span>
         </div>
+        <a v-if="item.url" :href="item.url" target="_blank" class="mt-0.5 block text-xs text-primary hover:underline">{{ item.url }}</a>
         <p v-if="item.description" class="mt-1 text-sm text-gray-600">{{ item.description }}</p>
         <ul v-if="item.highlights.length > 0" class="mt-1 list-disc pl-4 text-sm text-gray-700">
           <li v-for="(h, i) in item.highlights.filter(Boolean)" :key="i">{{ h }}</li>

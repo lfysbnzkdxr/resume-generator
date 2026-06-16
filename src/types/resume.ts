@@ -10,6 +10,7 @@ export interface Education {
 export interface Project {
   id: string
   name: string
+  url: string
   role: string
   startDate: string
   endDate: string

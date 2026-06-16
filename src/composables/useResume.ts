@@ -17,6 +17,10 @@ export function useResume() {
   if (!resume.value.awards) {
     resume.value.awards = []
   }
+  // 数据迁移：为已有 project 条目补齐 url 字段
+  for (const p of resume.value.projects) {
+    if ((p as any).url === undefined) (p as any).url = ''
+  }
 
   function addEducation(): void {
     const newItem: Education = {
@@ -38,6 +42,7 @@ export function useResume() {
     const newItem: Project = {
       id: crypto.randomUUID(),
       name: '',
+      url: '',
       role: '',
       startDate: '',
       endDate: '',
