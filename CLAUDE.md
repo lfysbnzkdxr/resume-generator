@@ -38,6 +38,39 @@
 
 `useLocalStorage` 加载旧数据后立即补齐新字段（`basicsFieldOrder`、`birthday`、`competitions`、`awards`），确保 schema 变更向后兼容。
 
+## Resume Scoring (AI 评分功能)
+
+集成在项目内，不单独开发。架构如下：
+
+### 评分引擎 (`src/composables/useResumeScore.ts`)
+
+- **规则评分**: 纯函数 `scoreResume(resume)` 同步计算，5 个维度各 0-100 分
+  - 基本信息完整度（25%）：姓名/电话/邮箱/求职意向/地址是否填写
+  - 教育经历（20%）：是否有记录、字段是否完整
+  - 项目经历（25%）：描述和亮点数量与质量
+  - 竞赛奖励（15%）：是否有竞赛/奖励经历
+  - 总体丰富度（15%）：非空字段占比、亮点总数
+- **AI 建议**: `fetchAISuggestions(resume, apiKey)` 调 DeepSeek API，异步返回改进建议
+- API Key 存在 localStorage 中 `resume-ai-key`，首次使用弹窗输入
+
+### UI 组件 (`src/components/ScorePanel.vue`)
+
+- 入口：AppHeader 中"导出 PDF"旁加"AI 评分"按钮
+- 展示：底部弹出式面板（slide-up），包含：
+  - 总体评分 + 环形进度条
+  - 各维度评分条
+  - AI 生成的整体评价与改进建议（如果有 API Key）
+- 面板不影响打印（`no-print` 类）
+
+### 数据流
+
+```
+App.vue
+  ├─ useResume() → resume 数据
+  ├─ useResumeScore() → scoreResume, fetchAISuggestions, scoreResult
+  ├─ AppHeader ← onScore 回调
+  └─ ScorePanel ← scoreResult, resume
+
 ## Success Criteria
 
 1. 表单输入时预览实时更新

@@ -9,6 +9,7 @@
 
 ## 功能
 
+- **AI 评分** — 基于 5 维度规则引擎 + DeepSeek API 智能改进建议，助力简历优化
 - **表单编辑** — 左侧分块编辑基本信息（含拖拽排序）、教育经历、项目经历、竞赛经历、奖励荣誉
 - **实时预览** — 右侧 A4 比例实时同步显示简历效果，支持一寸照片
 - **导出 PDF** — iframe 隔离克隆预览区，调用浏览器原生打印，排版精确、文本可选中可搜索
@@ -32,6 +33,7 @@ npm run dev
 | 样式 | Tailwind CSS v4 |
 | 状态管理 | VueUse `useLocalStorage` |
 | PDF 导出 | iframe 隔离 + `iframe.contentWindow.print()` |
+| AI 评分 | 规则评分 + DeepSeek API |
 
 无需后端，无需数据库，所有数据仅存于浏览器 localStorage。
 
@@ -40,8 +42,11 @@ npm run dev
 ```
 src/
 ├── types/resume.ts              # 简历数据模型 + 字段映射
-├── composables/useResume.ts     # 状态管理 + localStorage 迁移
+├── composables/
+│   ├── useResume.ts             # 状态管理 + localStorage 迁移
+│   └── useResumeScore.ts        # AI 评分引擎 + DeepSeek 集成
 ├── components/
+│   ├── ScorePanel.vue           # 评分结果面板（底部弹出）
 │   ├── form/
 │   │   ├── BasicsForm.vue       # 基本信息（拖拽排序）
 │   │   ├── EducationForm.vue    # 教育经历
