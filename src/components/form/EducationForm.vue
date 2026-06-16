@@ -23,36 +23,28 @@ const emit = defineEmits<{
           <span class="text-xs font-medium text-gray-400">#{{ index + 1 }}</span>
           <button class="cursor-pointer text-xs text-red-500 hover:text-red-700" @click="emit('remove', item.id)">删除</button>
         </div>
-        <div class="space-y-3">
-          <div class="grid grid-cols-2 gap-3">
+        <div class="grid grid-cols-5 gap-3">
             <div>
               <label class="mb-1 block text-xs font-medium text-gray-600">学校</label>
               <input v-model="item.school" type="text" placeholder="清华大学" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm outline-none focus:border-primary" />
+            </div>
+            <div class="col-span-2">
+              <label class="mb-1 block text-xs font-medium text-gray-600">时间</label>
+              <div class="flex items-center gap-2">
+                <input v-model="item.startDate" type="text" placeholder="2016-09" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm outline-none focus:border-primary" />
+                <span class="text-gray-400">—</span>
+                <input v-model="item.endDate" type="text" placeholder="2020-07" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm outline-none focus:border-primary" />
+              </div>
             </div>
             <div>
               <label class="mb-1 block text-xs font-medium text-gray-600">专业</label>
               <input v-model="item.major" type="text" placeholder="计算机科学与技术" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm outline-none focus:border-primary" />
             </div>
-          </div>
-          <div class="grid grid-cols-3 gap-3">
             <div>
               <label class="mb-1 block text-xs font-medium text-gray-600">学历</label>
               <input v-model="item.degree" type="text" placeholder="本科" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm outline-none focus:border-primary" />
             </div>
-            <div>
-              <label class="mb-1 block text-xs font-medium text-gray-600">开始</label>
-              <input v-model="item.startDate" type="text" placeholder="2016-09" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm outline-none focus:border-primary" />
-            </div>
-            <div>
-              <label class="mb-1 block text-xs font-medium text-gray-600">结束</label>
-              <input v-model="item.endDate" type="text" placeholder="2020-07" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm outline-none focus:border-primary" />
-            </div>
           </div>
-          <div>
-            <label class="mb-1 block text-xs font-medium text-gray-600">描述（可选）</label>
-            <textarea v-model="item.description" rows="2" placeholder="GPA、荣誉、相关课程..." class="w-full resize-none rounded-md border border-gray-300 px-3 py-2 text-sm outline-none focus:border-primary" />
-          </div>
-        </div>
       </div>
       <div v-if="list.length === 0" class="rounded-lg border border-dashed border-gray-300 p-6 text-center text-sm text-gray-400">
         暂无教育经历，点击上方"添加"按钮

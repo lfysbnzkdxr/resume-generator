@@ -5,7 +5,7 @@ import FormPanel from './components/form/FormPanel.vue'
 import PreviewPanel from './components/preview/PreviewPanel.vue'
 import { useResume } from './composables/useResume'
 
-const { resume, addEducation, removeEducation, addExperience, removeExperience, addProject, removeProject, exportPDF } = useResume()
+const { resume, addEducation, removeEducation, addProject, removeProject, addCompetition, removeCompetition, addAward, removeAward, exportPDF } = useResume()
 </script>
 
 <template>
@@ -17,10 +17,12 @@ const { resume, addEducation, removeEducation, addExperience, removeExperience, 
           :resume="resume"
           @add-education="addEducation"
           @remove-education="removeEducation"
-          @add-experience="addExperience"
-          @remove-experience="removeExperience"
           @add-project="addProject"
           @remove-project="removeProject"
+          @add-competition="addCompetition"
+          @remove-competition="removeCompetition"
+          @add-award="addAward"
+          @remove-award="removeAward"
         />
       </template>
       <template #preview>

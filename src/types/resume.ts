@@ -5,39 +5,61 @@ export interface Education {
   major: string
   startDate: string
   endDate: string
-  description?: string
-}
-
-export interface Experience {
-  id: string
-  company: string
-  position: string
-  startDate: string
-  endDate: string
-  current: boolean
-  highlights: string[]
 }
 
 export interface Project {
   id: string
   name: string
   role: string
-  url?: string
   startDate: string
   endDate: string
   description: string
   highlights: string[]
 }
 
-export interface CustomSectionItem {
-  key: string
-  value: string
+export interface Competition {
+  id: string
+  name: string
+  role: string
+  date: string
+  description: string
+  highlights: string[]
 }
 
-export interface CustomSection {
+export interface Award {
   id: string
-  title: string
-  items: CustomSectionItem[]
+  name: string
+  date: string
+  description: string
+}
+
+export const BASIC_FIELD_KEYS = ['name', 'title', 'phone', 'email', 'location', 'birthday'] as const
+export type BasicFieldKey = typeof BASIC_FIELD_KEYS[number]
+
+export const BASIC_FIELD_LABELS: Record<BasicFieldKey, string> = {
+  name: '姓名',
+  title: '专业',
+  phone: '电话',
+  email: '邮箱',
+  location: '地址',
+  birthday: '生日',
+}
+
+const BASIC_FIELD_PLACEHOLDERS: Record<BasicFieldKey, string> = {
+  name: '张三',
+  title: '前端开发工程师',
+  phone: '138-0000-0000',
+  email: 'zhangsan@example.com',
+  location: '北京市',
+  birthday: '2000-01',
+}
+
+export function getBasicFieldLabel(key: string): string {
+  return BASIC_FIELD_LABELS[key as BasicFieldKey] || key
+}
+
+export function getBasicFieldPlaceholder(key: string): string {
+  return BASIC_FIELD_PLACEHOLDERS[key as BasicFieldKey] || ''
 }
 
 export interface ResumeData {
@@ -47,14 +69,15 @@ export interface ResumeData {
     email: string
     phone: string
     location: string
+    birthday: string
     avatar?: string
     summary: string
   }
+  basicsFieldOrder: string[]
   education: Education[]
-  experience: Experience[]
-  skills: string[]
   projects: Project[]
-  customSections: CustomSection[]
+  competitions: Competition[]
+  awards: Award[]
 }
 
 /** 创建默认空的简历数据 */
@@ -66,12 +89,13 @@ export function createEmptyResume(): ResumeData {
       email: '',
       phone: '',
       location: '',
+      birthday: '',
       summary: '',
     },
+    basicsFieldOrder: [...BASIC_FIELD_KEYS],
     education: [],
-    experience: [],
-    skills: [],
     projects: [],
-    customSections: [],
+    competitions: [],
+    awards: [],
   }
 }
